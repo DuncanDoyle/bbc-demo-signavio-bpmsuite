@@ -104,6 +104,7 @@ end
 rule "initialize_version_info"
     no-loop true
     salience 1000
+    ruleflow-group "determine-approval-group"
 when
 then
 	drools.getWorkingMemory().setGlobal("modelId", "6b8d52148ad8422ea99ef8ff3af960cb");
@@ -113,6 +114,7 @@ end
 rule "initialize_annotations_list"
     no-loop true
     salience 1000
+    ruleflow-group "determine-approval-group"
 when
 then
 	drools.getWorkingMemory().setGlobal("$allMessages", new ArrayList());
@@ -121,6 +123,7 @@ end
 rule "add_formulae_to_memory"
     no-loop true
     salience 1000
+    ruleflow-group "determine-approval-group"
 when
 then
 	insert(new DmnFormulaeLocal());
@@ -130,6 +133,7 @@ end
 rule "init_logger"
     no-loop true
     salience 1000
+    ruleflow-group "determine-approval-group"
 when
 then
 	drools.getWorkingMemory().setGlobal("$logger", LoggerFactory.getLogger("DroolsExecution"));
@@ -138,6 +142,7 @@ end
 rule "log_input_rule"
     no-loop true
     salience 999
+    ruleflow-group "determine-approval-group"
 when
     $input : Input(  )  
 then
@@ -148,6 +153,7 @@ rule "decideCreditScore_rule_1"
     no-loop true
     //decision:  decideCreditScore
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -168,6 +174,7 @@ rule "decideCreditScore_rule_2"
     no-loop true
     //decision:  decideCreditScore
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -188,6 +195,7 @@ rule "decideCreditScore_rule_3"
     no-loop true
     //decision:  decideCreditScore
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -208,6 +216,7 @@ rule "decideCreditScore_rule_4"
     no-loop true
     //decision:  decideCreditScore
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -228,6 +237,7 @@ rule "decideCreditScore_rule_5"
     no-loop true
     //decision:  decideCreditScore
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -248,6 +258,7 @@ rule "decideCreditScore_singleResultOutput"
     no-loop true
     //decision:  decideCreditScore
     salience 0
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -266,6 +277,7 @@ rule "decideCreditScore_emptyResultFallBack"
     no-loop true
     //decision:  decideCreditScore
     salience -1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -282,6 +294,7 @@ rule "decideCreditScore_cleanup_rule_output"
     no-loop true
     //decision:  decideCreditScore
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -295,6 +308,7 @@ rule "rateExpenseRatio_rule_1"
     no-loop true
     //decision:  rateExpenseRatio
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -316,6 +330,7 @@ rule "rateExpenseRatio_rule_2"
     no-loop true
     //decision:  rateExpenseRatio
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -337,6 +352,7 @@ rule "rateExpenseRatio_rule_3"
     no-loop true
     //decision:  rateExpenseRatio
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -358,6 +374,7 @@ rule "rateExpenseRatio_rule_4"
     no-loop true
     //decision:  rateExpenseRatio
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -379,6 +396,7 @@ rule "rateExpenseRatio_singleResultOutput"
     no-loop true
     //decision:  rateExpenseRatio
     salience 0
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -398,6 +416,7 @@ rule "rateExpenseRatio_emptyResultFallBack"
     no-loop true
     //decision:  rateExpenseRatio
     salience -1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -415,6 +434,7 @@ rule "rateExpenseRatio_cleanup_rule_output"
     no-loop true
     //decision:  rateExpenseRatio
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -428,6 +448,7 @@ rule "scoreCreditRisk_rule_1"
     no-loop true
     //decision:  scoreCreditRisk
     salience 10
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -448,6 +469,7 @@ rule "scoreCreditRisk_rule_2"
     no-loop true
     //decision:  scoreCreditRisk
     salience 9
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -468,6 +490,7 @@ rule "scoreCreditRisk_rule_3"
     no-loop true
     //decision:  scoreCreditRisk
     salience 8
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -488,6 +511,7 @@ rule "scoreCreditRisk_rule_4"
     no-loop true
     //decision:  scoreCreditRisk
     salience 7
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -508,6 +532,7 @@ rule "scoreCreditRisk_rule_5"
     no-loop true
     //decision:  scoreCreditRisk
     salience 6
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -528,6 +553,7 @@ rule "scoreCreditRisk_rule_6"
     no-loop true
     //decision:  scoreCreditRisk
     salience 5
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -548,6 +574,7 @@ rule "scoreCreditRisk_rule_7"
     no-loop true
     //decision:  scoreCreditRisk
     salience 4
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -568,6 +595,7 @@ rule "scoreCreditRisk_rule_8"
     no-loop true
     //decision:  scoreCreditRisk
     salience 3
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -588,6 +616,7 @@ rule "scoreCreditRisk_rule_9"
     no-loop true
     //decision:  scoreCreditRisk
     salience 2
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -608,6 +637,7 @@ rule "scoreCreditRisk_rule_10"
     no-loop true
     //decision:  scoreCreditRisk
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -628,6 +658,7 @@ rule "scoreCreditRisk_aggregation"
     no-loop true
     //decision:  scoreCreditRisk
     salience 0
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -653,6 +684,7 @@ rule "scoreCreditRisk_cleanup_rule_output"
     no-loop true
     //decision:  scoreCreditRisk
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -666,6 +698,7 @@ rule "computeExpenseRatio_rule_1"
     no-loop true
     //decision:  computeExpenseRatio
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -685,6 +718,7 @@ rule "computeExpenseRatio_singleResultOutput"
     no-loop true
     //decision:  computeExpenseRatio
     salience 0
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -703,6 +737,7 @@ rule "computeExpenseRatio_emptyResultFallBack"
     no-loop true
     //decision:  computeExpenseRatio
     salience -1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -719,6 +754,7 @@ rule "computeExpenseRatio_cleanup_rule_output"
     no-loop true
     //decision:  computeExpenseRatio
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -732,6 +768,7 @@ rule "determineInterestRate_rule_1"
     no-loop true
     //decision:  determineInterestRate
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -764,6 +801,7 @@ rule "determineInterestRate_rule_2"
     no-loop true
     //decision:  determineInterestRate
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -796,6 +834,7 @@ rule "determineInterestRate_rule_3"
     no-loop true
     //decision:  determineInterestRate
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -828,6 +867,7 @@ rule "determineInterestRate_rule_4"
     no-loop true
     //decision:  determineInterestRate
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -860,6 +900,7 @@ rule "determineInterestRate_singleResultOutput"
     no-loop true
     //decision:  determineInterestRate
     salience 0
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -881,6 +922,7 @@ rule "determineInterestRate_emptyResultFallBack"
     no-loop true
     //decision:  determineInterestRate
     salience -1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
@@ -899,6 +941,7 @@ rule "determineInterestRate_cleanup_rule_output"
     no-loop true
     //decision:  determineInterestRate
     salience 1
+    ruleflow-group "determine-approval-group"
 when
     $F : DmnFormulaeLocal(  )  
     $H : DmnHierarchyFormulae(  )  
