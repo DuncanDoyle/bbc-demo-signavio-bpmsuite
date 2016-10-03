@@ -7,6 +7,14 @@
   <version>1.0</version>
   <packaging>kjar</packaging>
   <name>demobbc</name>
+  <dependencies>
+    <dependency>
+      <groupId>com.signavio.dmn.formulae.v3</groupId>
+      <artifactId>formulaeV3</artifactId>
+      <version>1.0</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
   <repositories>
     <repository>
       <id>guvnor-m2-repo</id>
