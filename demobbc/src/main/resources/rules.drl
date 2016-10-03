@@ -1,5 +1,3 @@
-package com.signavio
-
 import java.time.OffsetTime
 import java.util.Arrays
 import org.slf4j.Logger
