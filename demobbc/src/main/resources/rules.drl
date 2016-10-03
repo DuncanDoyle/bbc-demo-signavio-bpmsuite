@@ -1,0 +1,909 @@
+package com.signavio.droolsexport._6b8d52148ad8422ea99ef8ff3af960cb._3 
+
+import java.time.OffsetTime
+import java.util.Arrays
+import org.slf4j.Logger
+import java.text.DecimalFormat
+import org.slf4j.LoggerFactory
+import com.signavio.dmn.formulae.v3.IndexedListElement
+import java.util.ArrayList
+import java.util.HashSet
+import java.math.BigDecimal
+import java.util.List
+import java.time.OffsetDateTime
+import com.signavio.dmn.formulae.v3.DmnHierarchyFormulae
+import java.time.LocalDate
+import com.signavio.dmn.formulae.v3.DmnFormulae
+import java.util.Collections
+import java.math.RoundingMode
+
+global String modelId
+global Integer revisionNumber
+global List $allMessages
+global Logger $logger
+
+declare  DmnFormulae 
+end
+
+declare  DmnFormulaeLocal  extends  DmnFormulae  
+end
+
+declare  DmnHierarchyFormulae 
+end
+
+declare  IndexedListElement 
+end
+
+declare  Input 
+    fICO : BigDecimal  
+    bankruptcies : Boolean  
+    medical : BigDecimal  
+    defaults : Boolean  
+    rentOrMortgage : BigDecimal  
+    income : BigDecimal  
+    settlements : Boolean  
+    consumerDebt : BigDecimal  
+end
+
+declare  DecideCreditScore  extends  IndexedListElement  
+    decideCreditScore : String  
+end
+
+declare  DecideCreditScore_Output 
+    decideCreditScore : String  
+end
+
+declare  RateExpenseRatio  extends  IndexedListElement  
+    rateExpenseRatio : String  
+end
+
+declare  RateExpenseRatio_Output 
+    rateExpenseRatio : String  
+end
+
+declare  ScoreCreditRisk  extends  IndexedListElement  
+    scoreCreditRisk : BigDecimal  
+end
+
+declare  ScoreCreditRisk_Output 
+    scoreCreditRisk : BigDecimal  
+end
+
+declare  ComputeExpenseRatio  extends  IndexedListElement  
+    computeExpenseRatio : BigDecimal  
+end
+
+declare  ComputeExpenseRatio_Output 
+    computeExpenseRatio : BigDecimal  
+end
+
+declare  DetermineInterestRate  extends  IndexedListElement  
+    cardRate : BigDecimal  
+    score : BigDecimal  
+end
+
+declare  DetermineInterestRate_Output 
+    determineInterestRate : DetermineInterestRate  
+    cardRate : BigDecimal  
+    score : BigDecimal  
+end
+
+declare  AnnotationItem 
+    decision : String  
+    annotationName : String  
+    ruleName : String  
+    category : AnnotationCategory  
+    message : String  
+    timestamp : OffsetDateTime  
+end
+
+declare enum AnnotationCategory
+	INFO,CRITICAL,REGULATION,POLICY;
+end
+
+rule "initialize_version_info"
+    no-loop true
+    salience 1000
+when
+then
+	drools.getWorkingMemory().setGlobal("modelId", "6b8d52148ad8422ea99ef8ff3af960cb");
+	drools.getWorkingMemory().setGlobal("revisionNumber", 3);
+end
+
+rule "initialize_annotations_list"
+    no-loop true
+    salience 1000
+when
+then
+	drools.getWorkingMemory().setGlobal("$allMessages", new ArrayList());
+end
+
+rule "add_formulae_to_memory"
+    no-loop true
+    salience 1000
+when
+then
+	insert(new DmnFormulaeLocal());
+	insert(new DmnHierarchyFormulae());
+end
+
+rule "init_logger"
+    no-loop true
+    salience 1000
+when
+then
+	drools.getWorkingMemory().setGlobal("$logger", LoggerFactory.getLogger("DroolsExecution"));
+end
+
+rule "log_input_rule"
+    no-loop true
+    salience 999
+when
+    $input : Input(  )  
+then
+	$logger.info($input.toString());
+end
+
+rule "decideCreditScore_rule_1"
+    no-loop true
+    //decision:  decideCreditScore
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DecideCreditScore_Output(  )   ) 
+    not( 
+    DecideCreditScore(  )   ) 
+    $input : Input(  )  
+    eval( $F.nullSafeEval(($F.lessThanOrEqualTo($input.getFICO(), BigDecimal.valueOf(579.0)))) ) 
+then
+	DecideCreditScore $decideCreditScore = new DecideCreditScore();
+	$decideCreditScore.setDecideCreditScore("Poor");
+	$decideCreditScore.setIndex(0);
+	insert($decideCreditScore);
+end
+
+rule "decideCreditScore_rule_2"
+    no-loop true
+    //decision:  decideCreditScore
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DecideCreditScore_Output(  )   ) 
+    not( 
+    DecideCreditScore(  )   ) 
+    $input : Input(  )  
+    eval( $F.nullSafeEval($F.and($F.lessThan(BigDecimal.valueOf(579.0), $input.getFICO()), $F.lessThanOrEqualTo($input.getFICO(), BigDecimal.valueOf(669.0)))) ) 
+then
+	DecideCreditScore $decideCreditScore = new DecideCreditScore();
+	$decideCreditScore.setDecideCreditScore("Not Good");
+	$decideCreditScore.setIndex(1);
+	insert($decideCreditScore);
+end
+
+rule "decideCreditScore_rule_3"
+    no-loop true
+    //decision:  decideCreditScore
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DecideCreditScore_Output(  )   ) 
+    not( 
+    DecideCreditScore(  )   ) 
+    $input : Input(  )  
+    eval( $F.nullSafeEval($F.and($F.lessThan(BigDecimal.valueOf(669.0), $input.getFICO()), $F.lessThanOrEqualTo($input.getFICO(), BigDecimal.valueOf(739.0)))) ) 
+then
+	DecideCreditScore $decideCreditScore = new DecideCreditScore();
+	$decideCreditScore.setDecideCreditScore("Good");
+	$decideCreditScore.setIndex(2);
+	insert($decideCreditScore);
+end
+
+rule "decideCreditScore_rule_4"
+    no-loop true
+    //decision:  decideCreditScore
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DecideCreditScore_Output(  )   ) 
+    not( 
+    DecideCreditScore(  )   ) 
+    $input : Input(  )  
+    eval( $F.nullSafeEval($F.and($F.lessThan(BigDecimal.valueOf(739.0), $input.getFICO()), $F.lessThanOrEqualTo($input.getFICO(), BigDecimal.valueOf(799.0)))) ) 
+then
+	DecideCreditScore $decideCreditScore = new DecideCreditScore();
+	$decideCreditScore.setDecideCreditScore("Very Good");
+	$decideCreditScore.setIndex(3);
+	insert($decideCreditScore);
+end
+
+rule "decideCreditScore_rule_5"
+    no-loop true
+    //decision:  decideCreditScore
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DecideCreditScore_Output(  )   ) 
+    not( 
+    DecideCreditScore(  )   ) 
+    $input : Input(  )  
+    eval( $F.nullSafeEval(($F.greaterThan($input.getFICO(), BigDecimal.valueOf(799.0)))) ) 
+then
+	DecideCreditScore $decideCreditScore = new DecideCreditScore();
+	$decideCreditScore.setDecideCreditScore("Excellent");
+	$decideCreditScore.setIndex(4);
+	insert($decideCreditScore);
+end
+
+rule "decideCreditScore_singleResultOutput"
+    no-loop true
+    //decision:  decideCreditScore
+    salience 0
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DecideCreditScore_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore : DecideCreditScore(  )  
+then
+	DecideCreditScore_Output $decideCreditScore_Output = new DecideCreditScore_Output();
+	$decideCreditScore_Output.setDecideCreditScore($decideCreditScore.getDecideCreditScore());
+	retract($decideCreditScore);
+	insert($decideCreditScore_Output);
+end
+
+rule "decideCreditScore_emptyResultFallBack"
+    no-loop true
+    //decision:  decideCreditScore
+    salience -1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DecideCreditScore_Output(  )   ) 
+    $input : Input(  )  
+then
+	DecideCreditScore_Output $decideCreditScore_Output = new DecideCreditScore_Output();
+	$decideCreditScore_Output.setDecideCreditScore(null);
+	insert($decideCreditScore_Output);
+end
+
+rule "decideCreditScore_cleanup_rule_output"
+    no-loop true
+    //decision:  decideCreditScore
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    DecideCreditScore_Output(  )  
+    $decideCreditScore : DecideCreditScore(  )  
+then
+	retract($decideCreditScore);
+end
+
+rule "rateExpenseRatio_rule_1"
+    no-loop true
+    //decision:  rateExpenseRatio
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    RateExpenseRatio_Output(  )   ) 
+    not( 
+    RateExpenseRatio(  )   ) 
+    $input : Input(  )  
+    $computeExpenseRatio_Output : ComputeExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval(($F.lessThan($computeExpenseRatio_Output.getComputeExpenseRatio(), BigDecimal.valueOf(0.2)))) ) 
+then
+	RateExpenseRatio $rateExpenseRatio = new RateExpenseRatio();
+	$rateExpenseRatio.setRateExpenseRatio("Excellent");
+	$rateExpenseRatio.setIndex(0);
+	insert($rateExpenseRatio);
+end
+
+rule "rateExpenseRatio_rule_2"
+    no-loop true
+    //decision:  rateExpenseRatio
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    RateExpenseRatio_Output(  )   ) 
+    not( 
+    RateExpenseRatio(  )   ) 
+    $input : Input(  )  
+    $computeExpenseRatio_Output : ComputeExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.and($F.lessThanOrEqualTo(BigDecimal.valueOf(0.2), $computeExpenseRatio_Output.getComputeExpenseRatio()), $F.lessThanOrEqualTo($computeExpenseRatio_Output.getComputeExpenseRatio(), BigDecimal.valueOf(0.6)))) ) 
+then
+	RateExpenseRatio $rateExpenseRatio = new RateExpenseRatio();
+	$rateExpenseRatio.setRateExpenseRatio("Good");
+	$rateExpenseRatio.setIndex(1);
+	insert($rateExpenseRatio);
+end
+
+rule "rateExpenseRatio_rule_3"
+    no-loop true
+    //decision:  rateExpenseRatio
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    RateExpenseRatio_Output(  )   ) 
+    not( 
+    RateExpenseRatio(  )   ) 
+    $input : Input(  )  
+    $computeExpenseRatio_Output : ComputeExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.and($F.lessThan(BigDecimal.valueOf(0.6), $computeExpenseRatio_Output.getComputeExpenseRatio()), $F.lessThan($computeExpenseRatio_Output.getComputeExpenseRatio(), BigDecimal.valueOf(0.8)))) ) 
+then
+	RateExpenseRatio $rateExpenseRatio = new RateExpenseRatio();
+	$rateExpenseRatio.setRateExpenseRatio("Average");
+	$rateExpenseRatio.setIndex(2);
+	insert($rateExpenseRatio);
+end
+
+rule "rateExpenseRatio_rule_4"
+    no-loop true
+    //decision:  rateExpenseRatio
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    RateExpenseRatio_Output(  )   ) 
+    not( 
+    RateExpenseRatio(  )   ) 
+    $input : Input(  )  
+    $computeExpenseRatio_Output : ComputeExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval(($F.greaterThanOrEqualTo($computeExpenseRatio_Output.getComputeExpenseRatio(), BigDecimal.valueOf(0.8)))) ) 
+then
+	RateExpenseRatio $rateExpenseRatio = new RateExpenseRatio();
+	$rateExpenseRatio.setRateExpenseRatio("Poor");
+	$rateExpenseRatio.setIndex(3);
+	insert($rateExpenseRatio);
+end
+
+rule "rateExpenseRatio_singleResultOutput"
+    no-loop true
+    //decision:  rateExpenseRatio
+    salience 0
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    RateExpenseRatio_Output(  )   ) 
+    $input : Input(  )  
+    $computeExpenseRatio_Output : ComputeExpenseRatio_Output(  )  
+    $rateExpenseRatio : RateExpenseRatio(  )  
+then
+	RateExpenseRatio_Output $rateExpenseRatio_Output = new RateExpenseRatio_Output();
+	$rateExpenseRatio_Output.setRateExpenseRatio($rateExpenseRatio.getRateExpenseRatio());
+	retract($rateExpenseRatio);
+	insert($rateExpenseRatio_Output);
+end
+
+rule "rateExpenseRatio_emptyResultFallBack"
+    no-loop true
+    //decision:  rateExpenseRatio
+    salience -1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    RateExpenseRatio_Output(  )   ) 
+    $input : Input(  )  
+    $computeExpenseRatio_Output : ComputeExpenseRatio_Output(  )  
+then
+	RateExpenseRatio_Output $rateExpenseRatio_Output = new RateExpenseRatio_Output();
+	$rateExpenseRatio_Output.setRateExpenseRatio(null);
+	insert($rateExpenseRatio_Output);
+end
+
+rule "rateExpenseRatio_cleanup_rule_output"
+    no-loop true
+    //decision:  rateExpenseRatio
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    RateExpenseRatio_Output(  )  
+    $rateExpenseRatio : RateExpenseRatio(  )  
+then
+	retract($rateExpenseRatio);
+end
+
+rule "scoreCreditRisk_rule_1"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 10
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ScoreCreditRisk_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore_Output : DecideCreditScore_Output(  )  
+    $rateExpenseRatio_Output : RateExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.anyTrue(Arrays.asList( new Object[] {$F.equals($decideCreditScore_Output.getDecideCreditScore(), "Poor"), $F.equals($decideCreditScore_Output.getDecideCreditScore(), "Not Good")}))) ) 
+then
+	ScoreCreditRisk $scoreCreditRisk = new ScoreCreditRisk();
+	$scoreCreditRisk.setScoreCreditRisk(BigDecimal.valueOf(0.0));
+	$scoreCreditRisk.setIndex(0);
+	insert($scoreCreditRisk);
+end
+
+rule "scoreCreditRisk_rule_2"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 9
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ScoreCreditRisk_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore_Output : DecideCreditScore_Output(  )  
+    $rateExpenseRatio_Output : RateExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.equals($decideCreditScore_Output.getDecideCreditScore(), "Good")) ) 
+then
+	ScoreCreditRisk $scoreCreditRisk = new ScoreCreditRisk();
+	$scoreCreditRisk.setScoreCreditRisk(BigDecimal.valueOf(1.0));
+	$scoreCreditRisk.setIndex(1);
+	insert($scoreCreditRisk);
+end
+
+rule "scoreCreditRisk_rule_3"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 8
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ScoreCreditRisk_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore_Output : DecideCreditScore_Output(  )  
+    $rateExpenseRatio_Output : RateExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.equals($decideCreditScore_Output.getDecideCreditScore(), "Very Good")) ) 
+then
+	ScoreCreditRisk $scoreCreditRisk = new ScoreCreditRisk();
+	$scoreCreditRisk.setScoreCreditRisk(BigDecimal.valueOf(2.0));
+	$scoreCreditRisk.setIndex(2);
+	insert($scoreCreditRisk);
+end
+
+rule "scoreCreditRisk_rule_4"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 7
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ScoreCreditRisk_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore_Output : DecideCreditScore_Output(  )  
+    $rateExpenseRatio_Output : RateExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.equals($decideCreditScore_Output.getDecideCreditScore(), "Excellent")) ) 
+then
+	ScoreCreditRisk $scoreCreditRisk = new ScoreCreditRisk();
+	$scoreCreditRisk.setScoreCreditRisk(BigDecimal.valueOf(3.0));
+	$scoreCreditRisk.setIndex(3);
+	insert($scoreCreditRisk);
+end
+
+rule "scoreCreditRisk_rule_5"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 6
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ScoreCreditRisk_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore_Output : DecideCreditScore_Output(  )  
+    $rateExpenseRatio_Output : RateExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.anyTrue(Arrays.asList( new Object[] {$F.equals($rateExpenseRatio_Output.getRateExpenseRatio(), "Average"), $F.equals($rateExpenseRatio_Output.getRateExpenseRatio(), "Poor")}))) ) 
+then
+	ScoreCreditRisk $scoreCreditRisk = new ScoreCreditRisk();
+	$scoreCreditRisk.setScoreCreditRisk(BigDecimal.valueOf(0.0));
+	$scoreCreditRisk.setIndex(4);
+	insert($scoreCreditRisk);
+end
+
+rule "scoreCreditRisk_rule_6"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 5
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ScoreCreditRisk_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore_Output : DecideCreditScore_Output(  )  
+    $rateExpenseRatio_Output : RateExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.equals($rateExpenseRatio_Output.getRateExpenseRatio(), "Good")) ) 
+then
+	ScoreCreditRisk $scoreCreditRisk = new ScoreCreditRisk();
+	$scoreCreditRisk.setScoreCreditRisk(BigDecimal.valueOf(1.0));
+	$scoreCreditRisk.setIndex(5);
+	insert($scoreCreditRisk);
+end
+
+rule "scoreCreditRisk_rule_7"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 4
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ScoreCreditRisk_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore_Output : DecideCreditScore_Output(  )  
+    $rateExpenseRatio_Output : RateExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.equals($rateExpenseRatio_Output.getRateExpenseRatio(), "Excellent")) ) 
+then
+	ScoreCreditRisk $scoreCreditRisk = new ScoreCreditRisk();
+	$scoreCreditRisk.setScoreCreditRisk(BigDecimal.valueOf(2.0));
+	$scoreCreditRisk.setIndex(6);
+	insert($scoreCreditRisk);
+end
+
+rule "scoreCreditRisk_rule_8"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 3
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ScoreCreditRisk_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore_Output : DecideCreditScore_Output(  )  
+    $rateExpenseRatio_Output : RateExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.equals($input.getSettlements(), true)) ) 
+then
+	ScoreCreditRisk $scoreCreditRisk = new ScoreCreditRisk();
+	$scoreCreditRisk.setScoreCreditRisk(BigDecimal.valueOf(-2.0));
+	$scoreCreditRisk.setIndex(7);
+	insert($scoreCreditRisk);
+end
+
+rule "scoreCreditRisk_rule_9"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 2
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ScoreCreditRisk_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore_Output : DecideCreditScore_Output(  )  
+    $rateExpenseRatio_Output : RateExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.equals($input.getDefaults(), true)) ) 
+then
+	ScoreCreditRisk $scoreCreditRisk = new ScoreCreditRisk();
+	$scoreCreditRisk.setScoreCreditRisk(BigDecimal.valueOf(-2.0));
+	$scoreCreditRisk.setIndex(8);
+	insert($scoreCreditRisk);
+end
+
+rule "scoreCreditRisk_rule_10"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ScoreCreditRisk_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore_Output : DecideCreditScore_Output(  )  
+    $rateExpenseRatio_Output : RateExpenseRatio_Output(  )  
+    eval( $F.nullSafeEval($F.equals($input.getBankruptcies(), true)) ) 
+then
+	ScoreCreditRisk $scoreCreditRisk = new ScoreCreditRisk();
+	$scoreCreditRisk.setScoreCreditRisk(BigDecimal.valueOf(-4.0));
+	$scoreCreditRisk.setIndex(9);
+	insert($scoreCreditRisk);
+end
+
+rule "scoreCreditRisk_aggregation"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 0
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ScoreCreditRisk_Output(  )   ) 
+    $input : Input(  )  
+    $decideCreditScore_Output : DecideCreditScore_Output(  )  
+    $rateExpenseRatio_Output : RateExpenseRatio_Output(  )  
+    $all_ScoreCreditRisk : List(  ) from collect( ScoreCreditRisk(  )  ) 
+then
+	ScoreCreditRisk_Output $scoreCreditRisk_Output = new ScoreCreditRisk_Output();
+	$all_ScoreCreditRisk = $F.internalSortedByIndex($all_ScoreCreditRisk);
+	List $all_scoreCreditRisk = new ArrayList();
+	for (int $i = 0; $i < $all_ScoreCreditRisk.size(); $i++) {
+		ScoreCreditRisk $eachRuleOutput = (ScoreCreditRisk) $all_ScoreCreditRisk.get($i);
+		$all_scoreCreditRisk.add( $eachRuleOutput.getScoreCreditRisk() );
+	}
+	$scoreCreditRisk_Output.setScoreCreditRisk($F.sum($all_scoreCreditRisk));
+	insert($scoreCreditRisk_Output);
+end
+
+rule "scoreCreditRisk_cleanup_rule_output"
+    no-loop true
+    //decision:  scoreCreditRisk
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    ScoreCreditRisk_Output(  )  
+    $scoreCreditRisk : ScoreCreditRisk(  )  
+then
+	retract($scoreCreditRisk);
+end
+
+rule "computeExpenseRatio_rule_1"
+    no-loop true
+    //decision:  computeExpenseRatio
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ComputeExpenseRatio_Output(  )   ) 
+    not( 
+    ComputeExpenseRatio(  )   ) 
+    $input : Input(  )  
+then
+	ComputeExpenseRatio $computeExpenseRatio = new ComputeExpenseRatio();
+	$computeExpenseRatio.setComputeExpenseRatio(($F.divide($F.sum(Arrays.asList( new Object[] {$input.getConsumerDebt(), $input.getMedical(), $input.getRentOrMortgage()})), $input.getIncome())));
+	$computeExpenseRatio.setIndex(0);
+	insert($computeExpenseRatio);
+end
+
+rule "computeExpenseRatio_singleResultOutput"
+    no-loop true
+    //decision:  computeExpenseRatio
+    salience 0
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ComputeExpenseRatio_Output(  )   ) 
+    $input : Input(  )  
+    $computeExpenseRatio : ComputeExpenseRatio(  )  
+then
+	ComputeExpenseRatio_Output $computeExpenseRatio_Output = new ComputeExpenseRatio_Output();
+	$computeExpenseRatio_Output.setComputeExpenseRatio($computeExpenseRatio.getComputeExpenseRatio());
+	retract($computeExpenseRatio);
+	insert($computeExpenseRatio_Output);
+end
+
+rule "computeExpenseRatio_emptyResultFallBack"
+    no-loop true
+    //decision:  computeExpenseRatio
+    salience -1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    ComputeExpenseRatio_Output(  )   ) 
+    $input : Input(  )  
+then
+	ComputeExpenseRatio_Output $computeExpenseRatio_Output = new ComputeExpenseRatio_Output();
+	$computeExpenseRatio_Output.setComputeExpenseRatio(null);
+	insert($computeExpenseRatio_Output);
+end
+
+rule "computeExpenseRatio_cleanup_rule_output"
+    no-loop true
+    //decision:  computeExpenseRatio
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    ComputeExpenseRatio_Output(  )  
+    $computeExpenseRatio : ComputeExpenseRatio(  )  
+then
+	retract($computeExpenseRatio);
+end
+
+rule "determineInterestRate_rule_1"
+    no-loop true
+    //decision:  determineInterestRate
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DetermineInterestRate_Output(  )   ) 
+    not( 
+    DetermineInterestRate(  )   ) 
+    $input : Input(  )  
+    $scoreCreditRisk_Output : ScoreCreditRisk_Output(  )  
+    eval( $F.nullSafeEval(($F.lessThan($scoreCreditRisk_Output.getScoreCreditRisk(), BigDecimal.valueOf(1.0)))) ) 
+then
+	DetermineInterestRate $determineInterestRate = new DetermineInterestRate();
+	$determineInterestRate.setCardRate(BigDecimal.valueOf(1.0));
+	$determineInterestRate.setScore($scoreCreditRisk_Output.getScoreCreditRisk());
+	$determineInterestRate.setIndex(0);
+	insert($determineInterestRate);
+		{
+			AnnotationItem $annotation = new AnnotationItem();
+			String $message = $F.createAnnotation(new Object[] {"Reject the customer"});
+			$annotation.setDecision("determineInterestRate");
+			$annotation.setRuleName("determineInterestRate_rule_1");
+			$annotation.setCategory(AnnotationCategory.INFO);
+			$annotation.setMessage($message);
+			$annotation.setTimestamp(OffsetDateTime.now());
+			$allMessages.add($annotation);
+		}
+end
+
+rule "determineInterestRate_rule_2"
+    no-loop true
+    //decision:  determineInterestRate
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DetermineInterestRate_Output(  )   ) 
+    not( 
+    DetermineInterestRate(  )   ) 
+    $input : Input(  )  
+    $scoreCreditRisk_Output : ScoreCreditRisk_Output(  )  
+    eval( $F.nullSafeEval($F.and($F.lessThanOrEqualTo(BigDecimal.valueOf(1.0), $scoreCreditRisk_Output.getScoreCreditRisk()), $F.lessThan($scoreCreditRisk_Output.getScoreCreditRisk(), BigDecimal.valueOf(2.0)))) ) 
+then
+	DetermineInterestRate $determineInterestRate = new DetermineInterestRate();
+	$determineInterestRate.setCardRate(BigDecimal.valueOf(0.2));
+	$determineInterestRate.setScore($scoreCreditRisk_Output.getScoreCreditRisk());
+	$determineInterestRate.setIndex(1);
+	insert($determineInterestRate);
+		{
+			AnnotationItem $annotation = new AnnotationItem();
+			String $message = $F.createAnnotation(new Object[] {"Retail"});
+			$annotation.setDecision("determineInterestRate");
+			$annotation.setRuleName("determineInterestRate_rule_2");
+			$annotation.setCategory(AnnotationCategory.INFO);
+			$annotation.setMessage($message);
+			$annotation.setTimestamp(OffsetDateTime.now());
+			$allMessages.add($annotation);
+		}
+end
+
+rule "determineInterestRate_rule_3"
+    no-loop true
+    //decision:  determineInterestRate
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DetermineInterestRate_Output(  )   ) 
+    not( 
+    DetermineInterestRate(  )   ) 
+    $input : Input(  )  
+    $scoreCreditRisk_Output : ScoreCreditRisk_Output(  )  
+    eval( $F.nullSafeEval($F.and($F.lessThanOrEqualTo(BigDecimal.valueOf(2.0), $scoreCreditRisk_Output.getScoreCreditRisk()), $F.lessThanOrEqualTo($scoreCreditRisk_Output.getScoreCreditRisk(), BigDecimal.valueOf(3.0)))) ) 
+then
+	DetermineInterestRate $determineInterestRate = new DetermineInterestRate();
+	$determineInterestRate.setCardRate(BigDecimal.valueOf(0.15));
+	$determineInterestRate.setScore($scoreCreditRisk_Output.getScoreCreditRisk());
+	$determineInterestRate.setIndex(2);
+	insert($determineInterestRate);
+		{
+			AnnotationItem $annotation = new AnnotationItem();
+			String $message = $F.createAnnotation(new Object[] {"Retail"});
+			$annotation.setDecision("determineInterestRate");
+			$annotation.setRuleName("determineInterestRate_rule_3");
+			$annotation.setCategory(AnnotationCategory.INFO);
+			$annotation.setMessage($message);
+			$annotation.setTimestamp(OffsetDateTime.now());
+			$allMessages.add($annotation);
+		}
+end
+
+rule "determineInterestRate_rule_4"
+    no-loop true
+    //decision:  determineInterestRate
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DetermineInterestRate_Output(  )   ) 
+    not( 
+    DetermineInterestRate(  )   ) 
+    $input : Input(  )  
+    $scoreCreditRisk_Output : ScoreCreditRisk_Output(  )  
+    eval( $F.nullSafeEval(($F.greaterThan($scoreCreditRisk_Output.getScoreCreditRisk(), BigDecimal.valueOf(3.0)))) ) 
+then
+	DetermineInterestRate $determineInterestRate = new DetermineInterestRate();
+	$determineInterestRate.setCardRate(BigDecimal.valueOf(0.1));
+	$determineInterestRate.setScore($scoreCreditRisk_Output.getScoreCreditRisk());
+	$determineInterestRate.setIndex(3);
+	insert($determineInterestRate);
+		{
+			AnnotationItem $annotation = new AnnotationItem();
+			String $message = $F.createAnnotation(new Object[] {"Wealth Card"});
+			$annotation.setDecision("determineInterestRate");
+			$annotation.setRuleName("determineInterestRate_rule_4");
+			$annotation.setCategory(AnnotationCategory.INFO);
+			$annotation.setMessage($message);
+			$annotation.setTimestamp(OffsetDateTime.now());
+			$allMessages.add($annotation);
+		}
+end
+
+rule "determineInterestRate_singleResultOutput"
+    no-loop true
+    //decision:  determineInterestRate
+    salience 0
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DetermineInterestRate_Output(  )   ) 
+    $input : Input(  )  
+    $scoreCreditRisk_Output : ScoreCreditRisk_Output(  )  
+    $determineInterestRate : DetermineInterestRate(  )  
+then
+	DetermineInterestRate_Output $determineInterestRate_Output = new DetermineInterestRate_Output();
+	$determineInterestRate_Output.setCardRate($determineInterestRate.getCardRate());
+	$determineInterestRate_Output.setScore($determineInterestRate.getScore());
+	$determineInterestRate_Output.setDetermineInterestRate($determineInterestRate);
+	retract($determineInterestRate);
+	insert($determineInterestRate_Output);
+end
+
+rule "determineInterestRate_emptyResultFallBack"
+    no-loop true
+    //decision:  determineInterestRate
+    salience -1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    not( 
+    DetermineInterestRate_Output(  )   ) 
+    $input : Input(  )  
+    $scoreCreditRisk_Output : ScoreCreditRisk_Output(  )  
+then
+	DetermineInterestRate_Output $determineInterestRate_Output = new DetermineInterestRate_Output();
+	$determineInterestRate_Output.setCardRate(null);
+	$determineInterestRate_Output.setScore(null);
+	insert($determineInterestRate_Output);
+end
+
+rule "determineInterestRate_cleanup_rule_output"
+    no-loop true
+    //decision:  determineInterestRate
+    salience 1
+when
+    $F : DmnFormulaeLocal(  )  
+    $H : DmnHierarchyFormulae(  )  
+    DetermineInterestRate_Output(  )  
+    $determineInterestRate : DetermineInterestRate(  )  
+then
+	retract($determineInterestRate);
+end
