@@ -9,9 +9,9 @@
   <name>demobbc</name>
   <dependencies>
     <dependency>
-      <groupId>com.signavio.dmn.formulae.v3</groupId>
-      <artifactId>formulaeV3</artifactId>
-      <version>1.0</version>
+      <groupId>com.signavio</groupId>
+      <artifactId>dmn-formulae-v3-java8</artifactId>
+      <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
