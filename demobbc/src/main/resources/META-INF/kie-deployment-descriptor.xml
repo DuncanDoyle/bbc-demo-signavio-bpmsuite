@@ -34,6 +34,12 @@
             <parameters/>
             <name>Rest</name>
         </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new org.jboss.ddoyle.jbpm.workitem.DemoSendWorkItemHandler()</identifier>
+            <parameters/>
+            <name>Send Task</name>
+        </work-item-handler>
     </work-item-handlers>
     <environment-entries/>
     <configurations/>
