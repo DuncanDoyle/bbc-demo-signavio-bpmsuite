@@ -9,14 +9,17 @@ public class Offer implements java.io.Serializable
 
    static final long serialVersionUID = 1L;
 
-   @org.kie.api.definition.type.Label(value = "Offer Number")
+   @org.kie.api.definition.type.Label("Offer Number")
    private java.lang.Long offerNumber;
-   @org.kie.api.definition.type.Label(value = "Card Type")
+   @org.kie.api.definition.type.Label("Card Type")
    private java.lang.String cardType;
-   @org.kie.api.definition.type.Label(value = "Interest Rate")
+   @org.kie.api.definition.type.Label("Interest Rate")
    private java.lang.Double interestRate;
-   @org.kie.api.definition.type.Label(value = "Maximum Credit")
+   @org.kie.api.definition.type.Label("Maximum Credit")
    private java.lang.Double maxCredit;
+
+   @org.kie.api.definition.type.Label(value = "Comment")
+   private java.lang.String comment;
 
    public Offer()
    {
@@ -62,13 +65,25 @@ public class Offer implements java.io.Serializable
       this.maxCredit = maxCredit;
    }
 
+   public java.lang.String getComment()
+   {
+      return this.comment;
+   }
+
+   public void setComment(java.lang.String comment)
+   {
+      this.comment = comment;
+   }
+
    public Offer(java.lang.Long offerNumber, java.lang.String cardType,
-         java.lang.Double interestRate, java.lang.Double maxCredit)
+         java.lang.Double interestRate, java.lang.Double maxCredit,
+         java.lang.String comment)
    {
       this.offerNumber = offerNumber;
       this.cardType = cardType;
       this.interestRate = interestRate;
       this.maxCredit = maxCredit;
+      this.comment = comment;
    }
 
 }
