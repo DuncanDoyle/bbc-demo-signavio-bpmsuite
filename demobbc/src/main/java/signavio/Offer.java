@@ -18,8 +18,11 @@ public class Offer implements java.io.Serializable
    @org.kie.api.definition.type.Label("Maximum Credit")
    private java.lang.Double maxCredit;
 
-   @org.kie.api.definition.type.Label(value = "Comment")
+   @org.kie.api.definition.type.Label("Comment")
    private java.lang.String comment;
+
+   @org.kie.api.definition.type.Label(value = "Prospect")
+   private signavio.Prospect prospect;
 
    public Offer()
    {
@@ -75,15 +78,26 @@ public class Offer implements java.io.Serializable
       this.comment = comment;
    }
 
+   public signavio.Prospect getProspect()
+   {
+      return this.prospect;
+   }
+
+   public void setProspect(signavio.Prospect prospect)
+   {
+      this.prospect = prospect;
+   }
+
    public Offer(java.lang.Long offerNumber, java.lang.String cardType,
          java.lang.Double interestRate, java.lang.Double maxCredit,
-         java.lang.String comment)
+         java.lang.String comment, signavio.Prospect prospect)
    {
       this.offerNumber = offerNumber;
       this.cardType = cardType;
       this.interestRate = interestRate;
       this.maxCredit = maxCredit;
       this.comment = comment;
+      this.prospect = prospect;
    }
 
 }
