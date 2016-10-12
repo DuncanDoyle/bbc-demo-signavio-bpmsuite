@@ -6,7 +6,7 @@ end
 
 rule "TestRule"
 when
-    MyTestTyp(value > 100)
+    MyTestType(value > 100)
 then    
     System.out.println("Rule fired.");
 end
