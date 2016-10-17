@@ -11,7 +11,7 @@
     <globals>
         <global>
             <resolver>mvel</resolver>
-            <identifier>LoggerFactory.getLogger("com.signavio.jbpm.DmnRules")</identifier>
+            <identifier>org.slf4j.LoggerFactory.getLogger("com.signavio.jbpm.DmnRules")</identifier>
             <parameters/>
             <name>$logger</name>
         </global>
