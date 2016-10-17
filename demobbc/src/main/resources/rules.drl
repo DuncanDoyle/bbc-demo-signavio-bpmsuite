@@ -936,6 +936,7 @@ then
 	$determineInterestRate_Output.setCardRate(null);
 	$determineInterestRate_Output.setScore(null);
 	insert($determineInterestRate_Output);
+	$logger.info("Empty result fallback.");
 end
 
 rule "determineInterestRate_cleanup_rule_output"
