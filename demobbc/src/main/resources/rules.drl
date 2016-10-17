@@ -916,6 +916,7 @@ then
 	$determineInterestRate_Output.setDetermineInterestRate($determineInterestRate);
 	retract($determineInterestRate);
 	insert($determineInterestRate_Output);
+	$logger.info($determineInterestRate_Output.toString());
 end
 
 rule "determineInterestRate_emptyResultFallBack"
