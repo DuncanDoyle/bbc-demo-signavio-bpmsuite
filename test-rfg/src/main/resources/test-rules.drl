@@ -1,0 +1,6 @@
+rule "testRule"
+ruleflow-group "my-rfg"
+when
+then
+    System.out.println("Rule fired.");
+end
