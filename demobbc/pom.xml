@@ -8,10 +8,7 @@
 	<packaging>kjar</packaging>
 	<name>demobbc</name>
 	<properties>
-		<version.org.kie>6.5.0-SNAPSHOT</version.org.kie>
-		<!-- 
 		<version.org.kie>6.5.0.CR2-redhat-1</version.org.kie>
-		 -->
 		<version.ch.qos.logback>1.1.7</version.ch.qos.logback>
 	</properties>
 	<dependencies>
@@ -32,18 +29,6 @@
 			<artifactId>demo-workitems</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.jbpm</groupId>
-			<artifactId>jbpm-test</artifactId>
-			<version>6.5.0-SNAPSHOT</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${version.ch.qos.logback}</version>
-			<scope>compile</scope>
-		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
@@ -57,7 +42,7 @@
 			<plugin>
 				<groupId>org.kie</groupId>
 				<artifactId>kie-maven-plugin</artifactId>
-				<version>6.5.0.CR1</version>
+				<version>${version.org.kie}</version>
 				<extensions>true</extensions>
 			</plugin>
 			<plugin>
@@ -69,7 +54,6 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 </project>
