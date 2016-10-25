@@ -18,7 +18,13 @@
             <parameters/>
         </event-listener>
     </event-listeners>
-    <task-event-listeners/>
+    <task-event-listeners>
+        <task-event-listener>
+            <resolver>Enter resolver type</resolver>
+            <identifier>new org.jbpm.services.task.lifecycle.listeners.BAMTaskEventListener(false)</identifier>
+            <parameters/>
+        </task-event-listener>
+    </task-event-listeners>
     <globals>
         <global>
             <resolver>mvel</resolver>
