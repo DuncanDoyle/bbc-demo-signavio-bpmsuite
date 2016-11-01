@@ -58,7 +58,7 @@ public class Prospect implements java.io.Serializable
       this.email = email;
    }
    
-   public void toString() {
+   public String toString() {
        StringBuilder builder = new StringBuilder("Prospect: ");
        builder.append("name: ").append(name).append(", ssn: ").append(ssn).append(", email: ").append(email);
        return builder.toString();
