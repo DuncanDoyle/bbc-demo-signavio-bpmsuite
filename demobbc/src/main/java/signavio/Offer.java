@@ -102,7 +102,7 @@ public class Offer implements java.io.Serializable
    
     public String toString() {
        StringBuilder builder = new StringBuilder("Offer: ");
-       builder.append("offerNumber: ").append(offerNumber).append(", cardType: ").append(cardType).append(", interestRate: ").append(interestRate).append(", maxCredit: ").append(maxCredit).append(", comment: ").append(comment).append(", prospect: ").append(prospect);
+       builder.append("offerNumber: ").append(offerNumber).append(", cardType: ").append(cardType).append(", interestRate: ").append(interestRate).append(", maxCredit: ").append(maxCredit).append(", comment: ").append(comment);
        return builder.toString();
    }
 
