@@ -43,5 +43,11 @@ public class Rejection implements java.io.Serializable
       this.reason = reason;
       this.prospect = prospect;
    }
+   
+   public String toString() {
+       StringBuilder builder = new StringBuilder("Rejection: ");
+       builder.append("reason: ").append(reason).append(", prospect: ").append(prospect);
+       return builder.toString();
+   }
 
 }
