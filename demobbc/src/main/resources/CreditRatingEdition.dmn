@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions namespace="http://www.signavio.com/dmn/1.1/diagram/6b8d52148ad8422ea99ef8ff3af960cb.xml" exporterVersion="10.15.0" name="CreditRatingEdition" id="id-6addfec4c21f4151962da61deb715785" sigExt:revisionId="14d8f0956b87451c9e50a93a6d923eef" sigExt:revisionNumber="4" xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:sig="http://www.signavio.com/dmn/1.1/diagram/6b8d52148ad8422ea99ef8ff3af960cb.xml" xmlns:sigExt="http://www.signavio.com/schema/dmn/1.1/" xmlns:feel="http://www.omg.org/spec/FEEL/20140401">
+    <extensionElements/>
+    <itemDefinition isCollection="false" name="bankruptcies" id="id-c3ce90488cf0992c0d56c66699e8fe2e" label="Bankruptcies ">
+        <typeRef>feel:boolean</typeRef>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="medical" id="id-407c3e034a72355736c087fe29920133" label="Medical">
+        <typeRef>feel:number</typeRef>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="decideCreditScore" id="id-49106623bcf8090a357de54a929e96ea" label="Decide Credit Score">
+        <typeRef>feel:string</typeRef>
+        <allowedValues>
+            <text>"Poor","Not Good","Good","Very Good","Excellent"</text>
+        </allowedValues>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="income" id="id-a077af37f62ebfd629304ec02c42d75c" label="Income">
+        <typeRef>feel:number</typeRef>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="settlements" id="id-e0e1f439909596b0100e5736b310b0fa" label="Settlements">
+        <typeRef>feel:boolean</typeRef>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="consumerDebt" id="id-b8b4f0655c841ea9deb471fe96c301b4" label="Consumer Debt">
+        <typeRef>feel:number</typeRef>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="rateExpenseRatio" id="id-bf9c799380d8060baefe2d04b6df7068" label="Rate Expense Ratio">
+        <typeRef>feel:string</typeRef>
+        <allowedValues>
+            <text>"Excellent","Good","Average","Poor"</text>
+        </allowedValues>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="defaults" id="id-1b7ded0af0879b5450731d364d1c634e" label="Defaults">
+        <typeRef>feel:boolean</typeRef>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="computeExpenseRatio" id="id-8b930dc904328cde5bd215231455cf24" label="Compute Expense Ratio">
+        <typeRef>feel:number</typeRef>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="scoreCreditRisk" id="id-42ab8c13c8775c7edd54958d647986c6" label="Score Credit Risk">
+        <typeRef>feel:number</typeRef>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="determineInterestRate" id="id-360d8e1760d7e396462188a56b6ee2fd" label="Determine Interest Rate">
+        <itemComponent isCollection="false" name="cardRate" id="sid-E8920BD7-0081-40C8-836A-6974A2EC1080-relation-29FB9287-A587-4A88-BC4C-5E7B1081ED08" label="Card Rate">
+            <typeRef>feel:number</typeRef>
+            <allowedValues>
+                <text>[0.0..2.0]</text>
+            </allowedValues>
+        </itemComponent>
+        <itemComponent isCollection="false" name="score" id="sid-E8920BD7-0081-40C8-836A-6974A2EC1080-relation-A9B2DC11-F3C9-41B2-B270-BF14974C5A98" label="Score">
+            <typeRef>feel:number</typeRef>
+        </itemComponent>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="fICO" id="id-0ef8529384a879eb1a2f2dff6b53234e" label="FICO">
+        <typeRef>feel:number</typeRef>
+        <allowedValues>
+            <text>[0.0..990.0]</text>
+        </allowedValues>
+    </itemDefinition>
+    <itemDefinition isCollection="false" name="rentOrMortgage" id="id-00f467cd6944e7d98050f6c10fd6bca7" label="Rent or Mortgage">
+        <typeRef>feel:number</typeRef>
+    </itemDefinition>
+    <inputData name="fICO" id="id-0df8aa2b2b4f63515a9b4519cd78b179" label="FICO" sigExt:shapeId="sid-FA58AF26-8589-4041-8699-C50D1C27D5BC" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:fICO" name="fICO" id="id-0df8aa2b2b4f63515a9b4519cd78b179_variable"/>
+    </inputData>
+    <inputData name="bankruptcies" id="id-640884d27835ffd7749b7ddd1775c822" label="Bankruptcies " sigExt:shapeId="sid-31BE249D-0677-4CEF-BDA3-991D51E3A3CC" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:bankruptcies" name="bankruptcies" id="id-640884d27835ffd7749b7ddd1775c822_variable"/>
+    </inputData>
+    <inputData name="medical" id="id-2001b20043b14cd8489598d8585893b3" label="Medical" sigExt:shapeId="sid-27A727D4-1B2D-4AF5-9380-CBFE227830D3" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:medical" name="medical" id="id-2001b20043b14cd8489598d8585893b3_variable"/>
+    </inputData>
+    <inputData name="defaults" id="id-4f2b575dfad2131297d31fb7d0de9b28" label="Defaults" sigExt:shapeId="sid-FC123425-F15A-428F-8510-4E6ACBF8EFD2" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:defaults" name="defaults" id="id-4f2b575dfad2131297d31fb7d0de9b28_variable"/>
+    </inputData>
+    <inputData name="rentOrMortgage" id="id-9418fd021c11cf749a1b93539f57ec0b" label="Rent or Mortgage" sigExt:shapeId="sid-15D30F12-B618-4C12-9BE4-183134EF6DB6" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:rentOrMortgage" name="rentOrMortgage" id="id-9418fd021c11cf749a1b93539f57ec0b_variable"/>
+    </inputData>
+    <inputData name="income" id="id-877ab43aa95d4650bf35cd0e41158d69" label="Income" sigExt:shapeId="sid-BCF9E00C-4368-4DB6-9CFB-0EAC5072ACD0" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:income" name="income" id="id-877ab43aa95d4650bf35cd0e41158d69_variable"/>
+    </inputData>
+    <inputData name="settlements" id="id-14aec157809cd709f318745ef5446d90" label="Settlements" sigExt:shapeId="sid-1C5775C8-0846-4516-8A93-A3891D94A197" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:settlements" name="settlements" id="id-14aec157809cd709f318745ef5446d90_variable"/>
+    </inputData>
+    <inputData name="consumerDebt" id="id-d64a1a4c28d6a807de7bebc0d5e29714" label="Consumer Debt" sigExt:shapeId="sid-6FCECDEA-0717-448D-9DE2-E533767C2CB4" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:consumerDebt" name="consumerDebt" id="id-d64a1a4c28d6a807de7bebc0d5e29714_variable"/>
+    </inputData>
+    <decision name="decideCreditScore" id="id-2014528cce6dc84ea53b2fcbb09eb642" label="Decide Credit Score" sigExt:shapeId="sid-192F97F9-3123-4467-8BDE-0A9531A3D608" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:decideCreditScore" name="decideCreditScore" id="id-2014528cce6dc84ea53b2fcbb09eb642_variable"/>
+        <informationRequirement>
+            <requiredInput href="#id-0df8aa2b2b4f63515a9b4519cd78b179"/>
+        </informationRequirement>
+        <decisionTable hitPolicy="UNIQUE">
+            <input id="id-098f3450db58416bece35c010ba39391" label="FICO">
+                <inputExpression>
+                    <text>fICO</text>
+                </inputExpression>
+            </input>
+            <output name="decideCreditScore" typeRef="feel:string" id="id-c29518c06c31a9d9c5c686603e606f4c" label="Decide Credit Score"/>
+            <rule id="id-a4141f42d11b6f8b2cee0db4d7fe40b1">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>&lt;= 579</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>"Poor"</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-e8fc2b60847485aa3434b9235836e434">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>(579..669]</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>"Not Good"</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-3b80da388f54613e4add18d4e6829169">
+                <description></description>
+                <inputEntry>
+                    <text>(669..739]</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>"Good"</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-148d01bcee01325472f34dc60ecc36ba">
+                <description></description>
+                <inputEntry>
+                    <text>(739..799]</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>"Very Good"</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-adcbd02cc4e8f9c831cdfa4a14752b4f">
+                <description></description>
+                <inputEntry>
+                    <text>&gt; 799</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>"Excellent"</text>
+                </outputEntry>
+            </rule>
+        </decisionTable>
+    </decision>
+    <decision name="rateExpenseRatio" id="id-65a3b43084d8e68ed9055e991db9173c" label="Rate Expense Ratio" sigExt:shapeId="sid-9877BE1D-1840-408C-89A2-933E10628DF7" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:rateExpenseRatio" name="rateExpenseRatio" id="id-65a3b43084d8e68ed9055e991db9173c_variable"/>
+        <informationRequirement>
+            <requiredDecision href="#id-f1bde7346e0ff7177fd3cc07226bfcf4"/>
+        </informationRequirement>
+        <decisionTable hitPolicy="UNIQUE">
+            <input id="id-184938f739999707f5367ea74603e7fe" label="Compute Expense Ratio">
+                <inputExpression>
+                    <text>computeExpenseRatio</text>
+                </inputExpression>
+            </input>
+            <output name="rateExpenseRatio" typeRef="feel:string" id="id-16ad7c197b9dfabebc81a9838c8e09ca" label="Rate Expense Ratio"/>
+            <rule id="id-33f1a49712a19a61b9616d4a11bcd46f">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>&lt; 0.2</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>"Excellent"</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-d5194e16d6c90ef3c2032adc52d611e5">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>[0.2..0.6]</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>"Good"</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-341fd1de3c8e3713ef3bfd96e17696ed">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>(0.6..0.8)</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>"Average"</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-5dabf69c5756fa9951a611ee30f3034a">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>&gt;= 0.8</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>"Poor"</text>
+                </outputEntry>
+            </rule>
+        </decisionTable>
+    </decision>
+    <decision name="scoreCreditRisk" id="id-f9421a95ac3f94905b16a9fb688e3a52" label="Score Credit Risk" sigExt:shapeId="sid-BBE073C6-4070-4E8A-8805-E66A4E3E6B2C" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:scoreCreditRisk" name="scoreCreditRisk" id="id-f9421a95ac3f94905b16a9fb688e3a52_variable"/>
+        <informationRequirement>
+            <requiredInput href="#id-4f2b575dfad2131297d31fb7d0de9b28"/>
+        </informationRequirement>
+        <informationRequirement>
+            <requiredInput href="#id-640884d27835ffd7749b7ddd1775c822"/>
+        </informationRequirement>
+        <informationRequirement>
+            <requiredInput href="#id-14aec157809cd709f318745ef5446d90"/>
+        </informationRequirement>
+        <informationRequirement>
+            <requiredDecision href="#id-2014528cce6dc84ea53b2fcbb09eb642"/>
+        </informationRequirement>
+        <informationRequirement>
+            <requiredDecision href="#id-65a3b43084d8e68ed9055e991db9173c"/>
+        </informationRequirement>
+        <decisionTable hitPolicy="COLLECT" aggregation="SUM">
+            <input id="id-de01049db161fb0a437a1001116ca043" label="Decide Credit Score">
+                <inputExpression>
+                    <text>decideCreditScore</text>
+                </inputExpression>
+            </input>
+            <input id="id-48c2ae5fd8e11a00e9aacff094d739b8" label="Rate Expense Ratio">
+                <inputExpression>
+                    <text>rateExpenseRatio</text>
+                </inputExpression>
+            </input>
+            <input id="id-cdff3551b9fc5928e3abfc2902db27f3" label="Settlements">
+                <inputExpression>
+                    <text>settlements</text>
+                </inputExpression>
+            </input>
+            <input id="id-056314f37a3297452580f2ee5f452a72" label="Defaults">
+                <inputExpression>
+                    <text>defaults</text>
+                </inputExpression>
+            </input>
+            <input id="id-85e9e5106e286b6d3530fd5713a62120" label="Bankruptcies ">
+                <inputExpression>
+                    <text>bankruptcies</text>
+                </inputExpression>
+            </input>
+            <output name="scoreCreditRisk" typeRef="feel:number" id="id-4de72141cd160bdb3054709041a409ad" label="Score Credit Risk"/>
+            <rule id="id-f35d4ba8a940f36770cab1b86f1fd01a">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>"Poor","Not Good"</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>0</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-bb30631a937b33f74ef3f4cfdece0fb3">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>"Good"</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>1</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-5f9f0ed6afbf32ea1212e46a787676a3">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>"Very Good"</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>2</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-223465b02c154766617db84b23f23068">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>"Excellent"</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>3</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-3aad543d1f43d86841cb0a1d66d4a76f">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>"Average","Poor"</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>0</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-65513b39cc1a9ef3dc886126819a82e6">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>"Good"</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>1</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-6e7d9aa54c00a5c057cba97ed0184444">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>"Excellent"</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>2</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-f1fb4c53d012bd9a2a9833e034b432f6">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>true</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>-2</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-d7c450399de4f2d170dd51340737c876">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>true</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>-2</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-1b341074878af114c10916e2814192c3">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>true</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>-4</text>
+                </outputEntry>
+            </rule>
+        </decisionTable>
+    </decision>
+    <decision name="computeExpenseRatio" id="id-f1bde7346e0ff7177fd3cc07226bfcf4" label="Compute Expense Ratio" sigExt:shapeId="sid-DDFF2F0C-3CAE-4BBD-890D-B1EF873C3B02" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:computeExpenseRatio" name="computeExpenseRatio" id="id-f1bde7346e0ff7177fd3cc07226bfcf4_variable"/>
+        <informationRequirement>
+            <requiredInput href="#id-2001b20043b14cd8489598d8585893b3"/>
+        </informationRequirement>
+        <informationRequirement>
+            <requiredInput href="#id-9418fd021c11cf749a1b93539f57ec0b"/>
+        </informationRequirement>
+        <informationRequirement>
+            <requiredInput href="#id-877ab43aa95d4650bf35cd0e41158d69"/>
+        </informationRequirement>
+        <informationRequirement>
+            <requiredInput href="#id-d64a1a4c28d6a807de7bebc0d5e29714"/>
+        </informationRequirement>
+        <decisionTable hitPolicy="UNIQUE">
+            <input id="id-5acc53a935534e0fb6d51e0804468d00" label="Rent or Mortgage">
+                <inputExpression>
+                    <text>rentOrMortgage</text>
+                </inputExpression>
+            </input>
+            <input id="id-21db4927938ad50a7eb6c17b11739c75" label="Medical">
+                <inputExpression>
+                    <text>medical</text>
+                </inputExpression>
+            </input>
+            <input id="id-da04ca1182b01ebdabdecb985e4e5e9c" label="Consumer Debt">
+                <inputExpression>
+                    <text>consumerDebt</text>
+                </inputExpression>
+            </input>
+            <input id="id-3fdd8221a9b68e791569be6c486d6d1d" label="Income">
+                <inputExpression>
+                    <text>income</text>
+                </inputExpression>
+            </input>
+            <output name="computeExpenseRatio" typeRef="feel:number" id="id-cdd4805b0e5fcceec10831011d5665b8" label="Compute Expense Ratio"/>
+            <rule id="id-0b08a1efd487f86e12daa847ac2f5d15">
+                <description>string(-)</description>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <inputEntry>
+                    <text>-</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>(sum([consumerDebt, medical, rentOrMortgage])/income)</text>
+                </outputEntry>
+            </rule>
+        </decisionTable>
+    </decision>
+    <decision name="determineInterestRate" id="id-203f60349bb0334e13ac4954f4f95db0" label="Determine Interest Rate" sigExt:shapeId="sid-E8920BD7-0081-40C8-836A-6974A2EC1080" sigExt:diagramId="6b8d52148ad8422ea99ef8ff3af960cb">
+        <variable typeRef="sig:determineInterestRate" name="determineInterestRate" id="id-203f60349bb0334e13ac4954f4f95db0_variable"/>
+        <informationRequirement>
+            <requiredDecision href="#id-f9421a95ac3f94905b16a9fb688e3a52"/>
+        </informationRequirement>
+        <decisionTable hitPolicy="UNIQUE">
+            <input id="id-793097814a251a7d0a6edad28edc67e5" label="Score Credit Risk">
+                <inputExpression>
+                    <text>scoreCreditRisk</text>
+                </inputExpression>
+            </input>
+            <output name="cardRate" typeRef="feel:number" id="id-1fc7f64b76d98ecf717ea8e88626af0c" label="Card Rate"/>
+            <output name="score" typeRef="feel:number" id="id-c12eabceff4383dac874ae8459f68dc2" label="Score"/>
+            <rule id="id-dc8ff328e194208291d2683459fc1364">
+                <description>string("Reject the customer")</description>
+                <inputEntry>
+                    <text>&lt; 1</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>1</text>
+                </outputEntry>
+                <outputEntry>
+                    <text>scoreCreditRisk</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-e37960e775c2e25a7e1ae4573c133135">
+                <description>string("Retail")</description>
+                <inputEntry>
+                    <text>[1..2)</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>0.2</text>
+                </outputEntry>
+                <outputEntry>
+                    <text>scoreCreditRisk</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-0ad23ccc3e74c8a2f64a9df851f5de36">
+                <description>string("Retail")</description>
+                <inputEntry>
+                    <text>[2..3]</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>0.15</text>
+                </outputEntry>
+                <outputEntry>
+                    <text>scoreCreditRisk</text>
+                </outputEntry>
+            </rule>
+            <rule id="id-f64e96fa8f96d835e9a06136df19973f">
+                <description>string("Wealth Card")</description>
+                <inputEntry>
+                    <text>&gt; 3</text>
+                </inputEntry>
+                <outputEntry>
+                    <text>0.1</text>
+                </outputEntry>
+                <outputEntry>
+                    <text>scoreCreditRisk</text>
+                </outputEntry>
+            </rule>
+        </decisionTable>
+    </decision>
+</definitions>
