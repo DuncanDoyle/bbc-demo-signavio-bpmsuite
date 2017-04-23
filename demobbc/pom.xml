@@ -11,7 +11,7 @@
 	<!--
 		<version.org.kie>6.5.0.CR2-redhat-1</version.org.kie>
 	-->
-		<version.org.kie>6.5.0.Final-redhat-2</version.org.kie>
+		<version.org.kie>7.0.0.CR1</version.org.kie>
 		<version.ch.qos.logback>1.1.7</version.ch.qos.logback>
 	</properties>
 	<dependencies>
